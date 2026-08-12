@@ -1,0 +1,41 @@
+JSON
+1
+{
+2
+"name": "office-inventory",
+3
+"private": true,
+4
+"version": "1.0.0",
+5
+"type": "module",
+6
+"scripts": {
+7
+"dev": "vite",
+8
+"build": "vite build",
+9
+"preview": "vite preview"
+10
+},
+11
+"dependencies": {
+12
+"react": "^18.3.1",
+13
+"react-dom": "^18.3.1",
+14
+"lucide-react": "^0.462.0"
+15
+},
+16
+"devDependencies": {
+17
+"@vitejs/plugin-react": "^4.3.1",
+18
+"vite": "^5.4.0"
+19
+}
+20
+}
