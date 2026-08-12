@@ -200,17 +200,10 @@ function ProductCard({ product, onIn, onOut, onDelete }) {
 function Modal({ title, children, onClose }) { return <div className="fixed inset-0 z-40 flex items-end justify-center bg-slate-950/60 p-0 sm:items-center sm:p-4" onMouseDown={onClose}><div className="max-h-[92vh] w-full max-w-lg overflow-auto rounded-t-3xl bg-white p-5 shadow-2xl sm:rounded-3xl" onMouseDown={(e) => e.stopPropagation()}><div className="mb-5 flex items-center justify-between"><h2 className="text-xl font-black">{title}</h2><button onClick={onClose} className="rounded-xl bg-slate-100 p-2 hover:bg-slate-200"><X /></button></div>{children}</div></div>; }
 function Field({ label, children }) { return <label className="grid gap-1.5 text-sm font-bold text-slate-700">{label}{children}</label>; }
 function Empty({ text }) {
-2
 return (
-3
 <div className="rounded-2xl bg-white p-10 text-center text-slate-400 shadow-sm">
-4
 <Package className="mx-auto mb-3" size={36} />
-5
 <p>{text}</p>
-6
 </div>
-7
 );
-8
 }
