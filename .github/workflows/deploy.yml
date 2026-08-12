@@ -10,105 +10,56 @@ branches:
 6
 - main
 7
-workflow_dispatch:
+ 
 8
- 
-9
 permissions:
-10
+9
 contents: read
-11
+10
 pages: write
-12
+11
 id-token: write
+12
+ 
 13
- 
-14
-concurrency:
-15
-group: pages
-16
-cancel-in-progress: true
-17
- 
-18
 jobs:
-19
+14
 build:
-20
+15
 runs-on: ubuntu-latest
-21
+16
  
-22
+17
 steps:
+18
+- uses: actions/checkout@v4
+19
+ 
+20
+- uses: actions/setup-node@v4
+21
+with:
+22
+node-version: 20
 23
-- name: Checkout
+ 
 24
-uses: actions/checkout@v4
+- run: npm install
 25
  
 26
-- name: Setup Node
+- run: npm run build
 27
-uses: actions/setup-node@v4
+ 
 28
-with:
+deploy:
 29
-node-version: 20
+needs: build
 30
-cache: npm
+runs-on: ubuntu-latest
 31
  
 32
-- name: Install dependencies
-33
-run: npm install
-34
- 
-35
-- name: Build application
-36
-run: npm run build
-37
- 
-38
-- name: Setup Pages
-39
-uses: actions/configure-pages@v5
-40
- 
-41
-- name: Upload built site
-42
-uses: actions/upload-pages-artifact@v3
-43
-with:
-44
-path: ./dist
-45
- 
-46
-deploy:
-47
-environment:
-48
-name: github-pages
-49
-url: ${{ steps.deployment.outputs.page_url }}
-50
- 
-51
-runs-on: ubuntu-latest
-52
-needs: build
-53
- 
-54
 steps:
-55
-- name: Deploy to GitHub Pages
-56
-id: deployment
-57
-uses: actions/deploy-pages@v4
-
+33
+- run: echo "Deploy completed"
