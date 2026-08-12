@@ -1,0 +1,115 @@
+name: Deploy office inventory
+2
+ 
+3
+on:
+4
+push:
+5
+branches:
+6
+- main
+7
+workflow_dispatch:
+8
+ 
+9
+permissions:
+10
+contents: read
+11
+pages: write
+12
+id-token: write
+13
+ 
+14
+concurrency:
+15
+group: pages
+16
+cancel-in-progress: true
+17
+ 
+18
+jobs:
+19
+build:
+20
+runs-on: ubuntu-latest
+21
+ 
+22
+steps:
+23
+- name: Checkout
+24
+uses: actions/checkout@v4
+25
+ 
+26
+- name: Setup Node
+27
+uses: actions/setup-node@v4
+28
+with:
+29
+node-version: 20
+30
+cache: npm
+31
+ 
+32
+- name: Install dependencies
+33
+run: npm install
+34
+ 
+35
+- name: Build application
+36
+run: npm run build
+37
+ 
+38
+- name: Setup Pages
+39
+uses: actions/configure-pages@v5
+40
+ 
+41
+- name: Upload built site
+42
+uses: actions/upload-pages-artifact@v3
+43
+with:
+44
+path: ./dist
+45
+ 
+46
+deploy:
+47
+environment:
+48
+name: github-pages
+49
+url: ${{ steps.deployment.outputs.page_url }}
+50
+ 
+51
+runs-on: ubuntu-latest
+52
+needs: build
+53
+ 
+54
+steps:
+55
+- name: Deploy to GitHub Pages
+56
+id: deployment
+57
+uses: actions/deploy-pages@v4
+58
+``
